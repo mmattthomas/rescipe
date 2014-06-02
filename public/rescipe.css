@@ -1,0 +1,110 @@
+body {
+    background: url('/backg.jpg') no-repeat center center fixed;
+	-webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    margin-top: 40px; 
+}
+
+body.modal-open #wrap{
+    -webkit-filter: blur(7px);
+    -moz-filter: blur(15px);
+    -o-filter: blur(15px);
+    -ms-filter: blur(15px);
+    filter: blur(15px);
+}
+  
+.modal-backdrop {background: #f7f7f7;}
+
+.loader
+{
+	background-image: url('/ajax-loader.gif');
+	background-repeat: no-repeat;
+	background-position: center;
+	height:100px;
+}
+
+.well {
+   background-color:rgba(245, 245, 245, 0.8);
+   width:80%;
+   margin-left:auto;
+   margin-right:auto;
+   
+}
+
+.searchwell {
+   width:80%;
+   margin-left:auto;
+   margin-right:auto;
+   
+}
+
+.yumlogo {
+	font-size:8pt;
+	float:right;
+	width:300px;
+}
+.panel > .list-group
+{
+    margin-bottom: 0;
+}
+.panel > .list-group .list-group-item
+{
+    border-width: 1px 0;
+}
+.panel > .list-group .list-group-item:first-child
+{
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}
+.panel > .list-group .list-group-item:last-child
+{
+    border-bottom: 0;
+}
+.panel-heading + .list-group .list-group-item:first-child
+{
+    border-top-width: 0;
+}
+.panel-default .list-group-item.active
+{
+    color: #000;
+    background-color: #DDD;
+    border-color: #DDD;
+}
+.panel-primary .list-group-item.active
+{
+    color: #FFF;
+    background-color: #428BCA;
+    border-color: #428BCA;
+}
+.panel-success .list-group-item.active
+{
+    color: #3C763D;
+    background-color: #DFF0D8;
+    border-color: #D6E9C6;
+}
+.panel-info .list-group-item.active
+{
+    color: #31708F;
+    background-color: #D9EDF7;
+    border-color: #BCE8F1;
+}
+.panel-warning .list-group-item.active
+{
+    color: #8A6D3B;
+    background-color: #FCF8E3;
+    border-color: #FAEBCC;
+}
+.panel-danger .list-group-item.active
+{
+    color: #A94442;
+    background-color: #F2DEDE;
+    border-color: #EBCCD1;
+}
+.panel a.list-group-item.active:hover, a.list-group-item.active:focus
+{
+    color: #000;
+    background-color: #DDD;
+    border-color: #DDD;
+}

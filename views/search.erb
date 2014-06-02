@@ -1,0 +1,89 @@
+<div class='well' id='searchwindow'>
+	<div style="width:80%;margin-left:auto;margin-right:auto;">
+		<form method='get' action='/search'>
+			<label>Query</label>
+			<input name='q' value='<%= @searched_for %>' size=80>
+			<input type='submit' value='Search for more!'>
+		</form>
+	</div>
+	<div class='yumlogo'>
+		Recipe search powered by Yummly
+		<a href='http://www.yummly.com/recipes/'>
+			<img src='http://static.yummly.com/api-logo.png' border=0>
+		</a>
+	</div>
+</div>
+<br/>
+<div class="searchwell" id="recipe-search-results">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+		    <h3 class="panel-title"><%= @result_count %> results found for <%= @searched_for %></h3>
+		</div>
+		<ul class="list-group">
+			<% @recipes.each do |recipe| %>
+			<div class="list-group-item">
+				<button class="btn btn-primary" data-id="<%=recipe['id']%>" data-toggle="modal" data-target="#recipe-modal">
+					<span class="glyphicon glyphicon-search" />
+				</button>
+				<a href="javascript:ModalRecipe('<%=recipe['id']%>')">Test Anchor Tag link</a>
+			    <a href="http://www.yummly.com/recipe/<%=recipe['id']%>"><%=recipe['recipeName']%></a>
+			</div>
+			<% end %>
+		</ul>
+	</div>
+</div>
+<div class='well' id='test-frame'>
+	This is a test, not a modal window.
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="recipe-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">recipename</h4>
+      </div>
+      <div class="modal-body">
+        Recipe Details...
+      </div>
+      <div class="modal-footer">
+		<button type="button" class="btn btn-primary">View Recipe</button>
+        	<button type="button" class="btn btn-primary">Save Recipe</button>
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Modal -->
+
+<!-- jquery -->
+<script language='text/javascript'>
+
+// $(docment).ready(function(e) {
+// 	var $searchResults = $('#recipe-search-results')
+// 	
+// 	$('#recipe-search-results').find('button').on('click', function(e) {
+// 		e.preventDefault();
+// 		$('#test-frame').load('/modal_view');
+// 		//$('#recipe-modal').modal('show');
+// 	});
+// });
+// 
+$(function() {
+	$(document).on('click', '.show-recipe', function(e) {
+		e.preventDefault();
+
+		$(".modal-body").html('');
+		$(".modal-body").addClass('loader');
+		$("#recipe-modal").modal('show');
+
+		$.post('/modal_view',
+			{yum_id: $(this).attr('data-id') },
+			function(html) {
+				$(".modal-body").removeClass('loader');
+				$(".modal-body").html(html);
+		});
+	});
+});
+</script>
