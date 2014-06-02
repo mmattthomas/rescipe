@@ -66,9 +66,11 @@ get '/search' do
   erb :search
 end
 
-get '/modal_view' do
+post '/modal_view' do
   puts 'modal view called'
   yum_id = params[:yum_id]
+  
+  # just for testing, if no 'yum_id' is passed, simulate one:
   yum_id = '_Home-Schooled_-BBQ-Chicken-Wings-511069' if yum_id.nil? || yum_id.empty?
 
   get_uri = yummly_get_api 

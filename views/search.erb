@@ -22,10 +22,9 @@
 		<ul class="list-group">
 			<% @recipes.each do |recipe| %>
 			<div class="list-group-item">
-				<button class="btn btn-primary" data-id="<%=recipe['id']%>" data-toggle="modal" data-target="#recipe-modal">
+				<button class="show-recipe" data-id="<%=recipe['id']%>" data-toggle="modal" data-target="#recipe-modal">
 					<span class="glyphicon glyphicon-search" />
 				</button>
-				<a href="javascript:ModalRecipe('<%=recipe['id']%>')">Test Anchor Tag link</a>
 			    <a href="http://www.yummly.com/recipe/<%=recipe['id']%>"><%=recipe['recipeName']%></a>
 			</div>
 			<% end %>
