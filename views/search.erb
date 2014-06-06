@@ -22,7 +22,7 @@
 		<ul class="list-group">
 			<% @recipes.each do |recipe| %>
 			<div class="list-group-item">
-				<button class="show-recipe" data-id="<%=recipe['id']%>" data-toggle="modal" data-target="#recipe-modal">
+				<button class="show-recipe" data-id="<%=recipe['id']%>" data-toggle="modal" data-target="#recipe-modal" value="<%=recipe['recipeName']%>">
 					<span class="glyphicon glyphicon-search" />
 				</button>
 			    <a href="http://www.yummly.com/recipe/<%=recipe['id']%>"><%=recipe['recipeName']%></a>
@@ -44,7 +44,7 @@
         ...Recipe Details...
       </div>
       <div class="modal-footer">
-		<button type="button" class="btn btn-primary">View Recipe</button>
+		<a class="btn btn-primary" id="view-recipe-button">View Recipe</a>
         	<button type="button" class="btn btn-primary">Save Recipe</button>
 		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
@@ -60,7 +60,8 @@ $(function() {
 	$(document).on('click', '.show-recipe', function(e) {
 		e.preventDefault();
 
-		$(".modal-title").html('the recipe name should be here');
+		$(".modal-title").html($(this).attr('value'));
+		$("#view-recipe-button").attr("href", "http://www.yummly.com/recipe/" + $(this).attr('data-id'));
 		$(".modal-body").html('');
 		$(".modal-body").addClass('loader');
 		$("#recipe-modal").modal('show');
