@@ -67,14 +67,14 @@ get '/search' do
 end
 
 post '/modal_view' do
-  puts 'modal view called'
+
   yum_id = params[:yum_id]
   
   # just for testing, if no 'yum_id' is passed, simulate one:
   yum_id = '_Home-Schooled_-BBQ-Chicken-Wings-511069' if yum_id.nil? || yum_id.empty?
-
+  
   get_uri = yummly_get_api 
-  get_uri.sub!('[recipe-id]', yum_id)
+  get_uri = get_uri.sub('[recipe-id]', yum_id)
 
   resp = RestClient.get(get_uri)
   doc = JSON.parse(resp)

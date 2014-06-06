@@ -31,9 +31,6 @@
 		</ul>
 	</div>
 </div>
-<div class='well' id='test-frame'>
-	This is a test, not a modal window.
-</div>
 
 <!-- Modal -->
 <div class="modal fade" id="recipe-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -44,7 +41,7 @@
         <h4 class="modal-title" id="myModalLabel">recipename</h4>
       </div>
       <div class="modal-body">
-        Recipe Details...
+        ...Recipe Details...
       </div>
       <div class="modal-footer">
 		<button type="button" class="btn btn-primary">View Recipe</button>
@@ -57,31 +54,24 @@
 <!-- /Modal -->
 
 <!-- jquery -->
-<script language='text/javascript'>
-
-// $(docment).ready(function(e) {
-// 	var $searchResults = $('#recipe-search-results')
-// 	
-// 	$('#recipe-search-results').find('button').on('click', function(e) {
-// 		e.preventDefault();
-// 		$('#test-frame').load('/modal_view');
-// 		//$('#recipe-modal').modal('show');
-// 	});
-// });
-// 
+<script>
 $(function() {
+	//$('.show-recipe').click(function(e) {
 	$(document).on('click', '.show-recipe', function(e) {
 		e.preventDefault();
 
+		$(".modal-title").html('the recipe name should be here');
 		$(".modal-body").html('');
 		$(".modal-body").addClass('loader');
 		$("#recipe-modal").modal('show');
+		//console.log("made it!")
 
 		$.post('/modal_view',
 			{yum_id: $(this).attr('data-id') },
 			function(html) {
 				$(".modal-body").removeClass('loader');
 				$(".modal-body").html(html);
+				//console.log(html)
 		});
 	});
 });
