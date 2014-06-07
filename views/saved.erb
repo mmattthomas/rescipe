@@ -1,34 +1,22 @@
 <!-- Alert -->
 <div id="alert_placeholder" class="alert alert-success alert-dismissable" style="display:none;width:80%;margin-left:auto;margin-right:auto;"></div>
 
-<div class='well' id='searchwindow'>
-	<div style="width:80%;margin-left:auto;margin-right:auto;">
-		<form method='get' action='/search'>
-			<label>Query</label>
-			<input name='q' value='<%= @searched_for %>' size=60>
-			<input type='submit' value='Search for more!'>
-		</form>
-	</div>
-	<div class='yumlogo'>
-		Recipe search powered by Yummly
-		<a href='http://www.yummly.com/recipes/'>
-			<img src='http://static.yummly.com/api-logo.png' border=0>
-		</a>
-	</div>
-</div>
-<br/>
+<!-- body: saved searches -->
 <div class="searchwell" id="recipe-search-results">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-		    <h3 class="panel-title"><%= @result_count %> results found for <%= @searched_for %></h3>
+		    <h3 class="panel-title"><%= @result_count %> saved recipes</h3>
 		</div>
 		<ul class="list-group">
 			<% @recipes.each do |recipe| %>
 			<div class="list-group-item">
-				<button class="show-recipe btn btn-primary" data-id="<%=recipe['id']%>" data-toggle="modal" data-target="#recipe-modal" value="<%=recipe['recipeName']%>">
+				<button class="show-recipe btn btn-primary" data-id="<%=recipe['yummly_id']%>" data-toggle="modal" data-target="#recipe-modal" value="<%=recipe['recipe_name']%>">
 					<span class="glyphicon glyphicon-search" />
 				</button>
-			    <a href="http://www.yummly.com/recipe/<%=recipe['id']%>"><%=recipe['recipeName']%></a>
+				<button class="delete-recipe btn btn-primary" data-id="<%=recipe['_id']%>">
+					<span class="glyphicon glyphicon-remove" />
+				</button>
+			    <a href="<%=recipe['url']%>"><%=recipe['recipe_name']%></a>
 			</div>
 			<% end %>
 		</ul>
@@ -48,7 +36,6 @@
       </div>
       <div class="modal-footer">
 		<a class="btn btn-primary" id="view-recipe-button" target="_new">View Recipe</a>
-        	<button type="button" class="btn btn-primary" id="save-recipe-button" data-id="">Save Recipe</button>
 		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -81,17 +68,16 @@ $(function() {
 		});
 	});
 	
-	$(document).on('click', '#save-recipe-button', function(e) {
+	$(document).on('click', '.delete-recipe', function(e) {
 		e.preventDefault();
-		
-		$.post('/add',
-			{yum_id: $(this).attr('data-id') },
+		console.log('what the heck')
+		$.post('/remove_saved_recipe',
+			{id: $(this).attr('data-id') },
 			function(html) {
-				$("#recipe-modal").modal('hide');
-				// - some friendly flash of recipe being added
+				console.log('html->' + html);
 				$("#alert_placeholder").html('<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + html);
 				$("#alert_placeholder").show();
-				setTimeout(function() {$("#alert_placeholder").hide();}, 3000)
+				setTimeout(function() {$("#alert_placeholder").hide();}, 3000);
 		});
 	});
 });
