@@ -32,13 +32,13 @@ end
 post '/add' do
   #can this be changed to ajax?
   recipe_url = params[:url]
-  yum_id = params[:id]
+  yum_id = params[:yum_id]
   if !recipe_url.nil? || !yum_id.nil?
     if recipe_url.nil? || recipe_url.empty?
       recipe_url = 'http://www.yummly.com/recipe/' + yum_id
     end
-  
-    #before inserting, search for dupes
+    puts "Recipe URL : #{recipe_url}"
+    #TODO before inserting, search for dupes
   
   	saved_rescipes.insert({
   		recipe_name: params[:recipe_name],
@@ -50,7 +50,7 @@ post '/add' do
     @flash_message = 'Unable to save recipe'
   end
   
-  erb :home
+  #erb :home
 end
 
 get '/search' do

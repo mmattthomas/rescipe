@@ -2,7 +2,7 @@
 	<div style="width:80%;margin-left:auto;margin-right:auto;">
 		<form method='get' action='/search'>
 			<label>Query</label>
-			<input name='q' value='<%= @searched_for %>' size=80>
+			<input name='q' value='<%= @searched_for %>' size=60>
 			<input type='submit' value='Search for more!'>
 		</form>
 	</div>
@@ -22,7 +22,7 @@
 		<ul class="list-group">
 			<% @recipes.each do |recipe| %>
 			<div class="list-group-item">
-				<button class="show-recipe" data-id="<%=recipe['id']%>" data-toggle="modal" data-target="#recipe-modal" value="<%=recipe['recipeName']%>">
+				<button class="show-recipe btn btn-primary" data-id="<%=recipe['id']%>" data-toggle="modal" data-target="#recipe-modal" value="<%=recipe['recipeName']%>">
 					<span class="glyphicon glyphicon-search" />
 				</button>
 			    <a href="http://www.yummly.com/recipe/<%=recipe['id']%>"><%=recipe['recipeName']%></a>
@@ -44,8 +44,8 @@
         ...Recipe Details...
       </div>
       <div class="modal-footer">
-		<a class="btn btn-primary" id="view-recipe-button">View Recipe</a>
-        	<button type="button" class="btn btn-primary">Save Recipe</button>
+		<a class="btn btn-primary" id="view-recipe-button" target="_new">View Recipe</a>
+        	<button type="button" class="btn btn-primary" id="save-recipe-button" data-id="">Save Recipe</button>
 		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
@@ -56,12 +56,12 @@
 <!-- jquery -->
 <script>
 $(function() {
-	//$('.show-recipe').click(function(e) {
 	$(document).on('click', '.show-recipe', function(e) {
 		e.preventDefault();
 
 		$(".modal-title").html($(this).attr('value'));
 		$("#view-recipe-button").attr("href", "http://www.yummly.com/recipe/" + $(this).attr('data-id'));
+		$("#save-recipe-button").attr("data-id", $(this).attr('data-id'));
 		$(".modal-body").html('');
 		$(".modal-body").addClass('loader');
 		$("#recipe-modal").modal('show');
@@ -73,6 +73,18 @@ $(function() {
 				$(".modal-body").removeClass('loader');
 				$(".modal-body").html(html);
 				//console.log(html)
+		});
+	});
+	
+	$(document).on('click', '#save-recipe-button', function(e) {
+		e.preventDefault();
+		
+		$.post('/add',
+			{yum_id: $(this).attr('data-id') },
+			function(html) {
+				console.log(html)
+				$("#recipe-modal").modal('hide');
+				// - some friendly flash of recipe being added
 		});
 	});
 });

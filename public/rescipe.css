@@ -26,17 +26,18 @@ body.modal-open #wrap{
 }
 
 .well {
-   background-color:rgba(245, 245, 245, 0.8);
-   width:80%;
-   margin-left:auto;
-   margin-right:auto;
+	background-color:rgba(245, 245, 245, 0.8);
+	width:55%;
+	margin-left:auto;
+	margin-right:auto;
    
 }
 
 .searchwell {
-   width:80%;
-   margin-left:auto;
-   margin-right:auto;
+	background-color:rgba(245, 245, 245, 0.8);
+   	width:55%;
+   	margin-left:auto;
+   	margin-right:auto;
    
 }
 
@@ -47,11 +48,13 @@ body.modal-open #wrap{
 }
 .panel > .list-group
 {
-    margin-bottom: 0;
+	background-color:rgba(245, 245, 245, 0.8);
+	margin-bottom: 0;
 }
 .panel > .list-group .list-group-item
 {
-    border-width: 1px 0;
+	/*background-color:rgba(245, 245, 245, 0.8);*/
+	border-width: 1px 0;
 }
 .panel > .list-group .list-group-item:first-child
 {
@@ -68,9 +71,10 @@ body.modal-open #wrap{
 }
 .panel-default .list-group-item.active
 {
-    color: #000;
+	color: #000;
     background-color: #DDD;
-    border-color: #DDD;
+	/*background-color:rgba(245, 245, 245, 0.8);*/
+	border-color: #DDD;
 }
 .panel-primary .list-group-item.active
 {
