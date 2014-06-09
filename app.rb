@@ -6,9 +6,14 @@ require 'rest_client'
 set :bind, '0.0.0.0' 
 set :port, 3000 
 
-mongo 	= Mongo::MongoClient.new
-db 		= mongo['rescipe']
-saved_rescipes	= db['saved_rescipes']
+# mongo   = Mongo::MongoClient.new
+# db     = mongo['rescipe']
+# saved_rescipes  = db['saved_rescipes']
+
+mongoclient = Mongo::MongoClient.from_uri('mongodb://mmt:mmt@oceanic.mongohq.com:10016/rescipe')
+db     = mongoclient['rescipe']
+coll   = db['saved_rescipes']
+
 
 def yummly_search_api
   $yummly_search_api ||= 'http://api.yummly.com/v1/api/recipes?_app_id=71efecf4&_app_key=466b1c65886c56ff6b81a9d77dbf6fa6'
