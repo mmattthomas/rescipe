@@ -10,9 +10,9 @@ set :port, 3000
 # db     = mongo['rescipe']
 # saved_rescipes  = db['saved_rescipes']
 
-mongoclient = Mongo::MongoClient.from_uri('mongodb://mmt:mmt@oceanic.mongohq.com:10016/rescipe')
-db     = mongoclient['rescipe']
-coll   = db['saved_rescipes']
+mongoclient     = Mongo::MongoClient.from_uri('mongodb://mmt:mmt@kahana.mongohq.com:10077/rescipe')
+db              = mongoclient['rescipe']
+saved_rescipes  = db['saved_rescipes']
 
 
 def yummly_search_api
