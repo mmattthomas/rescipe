@@ -11,7 +11,7 @@
 			<% @recipes.each do |recipe| %>
 			<div class="list-group-item">
 				<button class="show-recipe btn btn-primary" data-id="<%=recipe['yummly_id']%>" data-toggle="modal" data-target="#recipe-modal" value="<%=recipe['recipe_name']%>">
-					<span class="glyphicon glyphicon-search" />
+					<span class="glyphicon glyphicon-heart" />
 				</button>
 				<button class="delete-recipe btn btn-primary" data-id="<%=recipe['_id']%>">
 					<span class="glyphicon glyphicon-remove" />

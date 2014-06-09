@@ -14,6 +14,19 @@
 	</div>
 </div>
 <br/>
+<div class='well' id='submitwindow'>
+	<div style="width:80%;margin-left:auto;margin-right:auto;">
+		<form method='post' action='/add_manual'>
+			<label>Recipe Link</label>
+			<input name='url' value='' size=50>
+			<br/>
+			<label>Recipe Name/Description</label>
+			<input name='recipe_name' value='' size=50>
+			<input type='submit' value='Add this Recipe'>
+		</form>
+	</div>
+</div>
+
 <div class='well' id='homewell'>
 	<% if !@flash_message.nil? && !@flash_message.empty? %>
 	<h3><%= @flash_message %></h3>
@@ -28,13 +41,14 @@
 		<li><span class='glyphicon glyphicon-ok'/>Search for Recipes by name</li>
 		<li><span class='glyphicon glyphicon-ok'/>Recipes returned will provide link to article</li>
 		<li><span class='glyphicon glyphicon-ok'/>Magnifying glass, allows view of recipe in modal</li>
-		<li>Modal form buttons allow for viewing recipe, or saving to DB</li>
+		<li><span class='glyphicon glyphicon-ok'/>Modal form buttons allow for viewing recipe, or saving to DB</li>
 		<li>Graphics will display saltiness, bitterness, etc.</li>
+		<li>
 	</ul>
 	Bonus :
 	<ul>
-		<li>Can save favorites into a ... mongo database</li>
-		<li>Can retrieve favorites</li>
+		<li><span class='glyphicon glyphicon-ok'/>Can save favorites into a ... mongo database</li>
+		<li><span class='glyphicon glyphicon-ok'/>Can retrieve favorites</li>
 		<li>Can add links manually</li>
 		<li>Can search saved links</li>
 	</ul>

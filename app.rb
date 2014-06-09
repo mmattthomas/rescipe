@@ -30,9 +30,11 @@ end
 #
 
 post '/add' do
-  #can this be changed to ajax?
+
   recipe_url = params[:url]
   yum_id = params[:yum_id]
+  recipe_title = params[:recipe_name]
+  
   if !recipe_url.nil? || !yum_id.nil?
     if recipe_url.nil? || recipe_url.empty?
       recipe_url = 'http://www.yummly.com/recipe/' + yum_id
@@ -44,11 +46,15 @@ post '/add' do
     puts recipe
     puts '-=-=-=-=-=-=-==-=-=-=-=-=-=-='
     
-    puts "Recipe Name : #{recipe['name']}"
+    if recipe_title.nil?
+      recipe_title = recipe['name']
+    end
+    
+    puts "Recipe Name : #{recipe_title}"
     #TODO before inserting, search for dupes
   
   	saved_rescipes.insert({
-  		recipe_name: recipe['name'],
+  		recipe_name: recipe_title,
   		url: recipe_url,
   		yummly_id: yum_id
   		})
@@ -58,6 +64,43 @@ post '/add' do
   end
   
   #erb :home
+end
+
+post '/add_manual' do
+
+  recipe_url = params[:url]
+  yum_id = params[:yum_id]
+  recipe_title = params[:recipe_name]
+  
+  if !recipe_url.nil? || !yum_id.nil?
+    if recipe_url.nil? || recipe_url.empty?
+      recipe_url = 'http://www.yummly.com/recipe/' + yum_id
+    end
+    puts "Recipe URL : #{recipe_url}"
+    if !yum_id.nil?
+      recipe = get_yummly_recipe yum_id
+      puts '*_*_*_*_*_*_*_*_*_*_*_*_*_*_*'
+      puts recipe
+      puts '-=-=-=-=-=-=-==-=-=-=-=-=-=-='
+      if recipe_title.nil?
+        recipe_title = recipe['name']
+      end
+    end
+    
+    puts "Recipe Name : #{recipe_title}"
+    #TODO before inserting, search for dupes
+  
+  	saved_rescipes.insert({
+  		recipe_name: recipe_title,
+  		url: recipe_url,
+  		yummly_id: yum_id
+  		})
+    @flash_message = 'Your Recipe has been saved'
+  else
+    @flash_message = 'Unable to save recipe'
+  end
+  
+  erb :home
 end
 
 post '/dumb' do
