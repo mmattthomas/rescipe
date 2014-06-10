@@ -1,9 +1,15 @@
 <div class='well' id='searchwindow'>
 	<div style="width:80%;margin-left:auto;margin-right:auto;">
 		<form method='get' action='/search'>
-			<label>Query</label>
-			<input name='q' value='<%= @searched_for %>' size=50>
-			<input type='submit' value='Find some Recipes!'>
+			<div class='row'>
+				<div class='.col-xs-6 .col-lg-4'>
+					<label>Search for Recipes on Yummly</label>
+				</div>
+				<div class='.col-xs-12 .col-sm-6 .col-lg-8'>
+					<input name='q' value='<%= @searched_for %>' size=50>
+					<input type='submit' value='Find some Recipes!'>
+				</div>
+			</div>
 		</form>
 	</div>
 	<div class='yumlogo'>
@@ -17,12 +23,23 @@
 <div class='well' id='submitwindow'>
 	<div style="width:80%;margin-left:auto;margin-right:auto;">
 		<form method='post' action='/add_manual'>
-			<label>Recipe Link</label>
-			<input name='url' value='' size=50>
-			<br/>
-			<label>Recipe Name/Description</label>
-			<input name='recipe_name' value='' size=50>
-			<input type='submit' value='Add this Recipe'>
+			<div class='row'>
+				<div class='.col-xs-6 .col-lg-4'>
+					<label>Add a new Recipe Link</label>
+				</div>
+				<div class='.col-xs-12 .col-sm-6 .col-lg-8'>
+					<input name='url' value='' size=50>
+				</div>
+			</div>
+			<div class='row'>
+				<div class='.col-xs-6 .col-lg-4'>
+					<label>Recipe Title</label>
+				</div>
+				<div class='.col-xs-12 .col-sm-6 .col-lg-8'>
+					<input name='recipe_name' value='' size=50>
+					<input type='submit' value='Add this Recipe'>
+				</div>
+			</div>
 		</form>
 	</div>
 </div>
@@ -49,7 +66,7 @@
 	<ul>
 		<li><span class='glyphicon glyphicon-ok'/>Can save favorites into a ... mongo database</li>
 		<li><span class='glyphicon glyphicon-ok'/>Can retrieve favorites</li>
-		<li>Can add links manually</li>
+		<li><span class='glyphicon glyphicon-ok'/>Can add links manually</li>
 		<li>Can search saved links</li>
 	</ul>
 </div>

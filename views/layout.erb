@@ -4,12 +4,64 @@
 	<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	<!--<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">-->
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/rescipe.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/rescipe.css" />
 	<!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">-->
+	
+	<script>
+		$(document).ready(function() {
+		    $('.navbar-nav [data-toggle="tooltip"]').tooltip();
+		    $('.navbar-twitch-toggle').on('click', function(event) {
+		        event.preventDefault();
+		        $('.navbar-twitch').toggleClass('open');
+		    });
+    
+		    $('.nav-style-toggle').on('click', function(event) {
+		        event.preventDefault();
+		        var $current = $('.nav-style-toggle.disabled');
+		        $(this).addClass('disabled');
+		        $current.removeClass('disabled');
+		        $('.navbar-twitch').removeClass('navbar-'+$current.data('type'));
+		        $('.navbar-twitch').addClass('navbar-'+$(this).data('type'));
+		    });
+		});
+	</script>
+	
 	<title>[RESCIPE]</title>
 </head>
 <body>
-	<%= yield %>
+	<div class="navbar navbar-inverse navbar-twitch" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">
+					<span class="small-nav"> <i class="fa fa-cutlery fa-2x" style="display:block;text-align=center;"></i> </span>
+					<span class="full-nav"> &lt; RESCIPE &gt; </span>
+				</a>
+			</div>
+			<div class="">
+				<ul class="nav navbar-nav">
+					<li class="active">
+						<a href="/">
+							<span class="small-nav" data-toggle="tooltip" data-placement="right" title="Home"> 
+								<span class="glyphicon glyphicon-home"></span> 
+							</span>
+							<span class="full-nav"> Home </span>
+						</a>
+					</li>
+					<li>
+						<a href="/saved">
+							<span class="small-nav" data-toggle="tooltip" data-placement="right" title="Saved Items"> 
+								<span class="fa fa-floppy-o"></span> 
+							</span>
+							<span class="full-nav"> Saved Items </span>
+						</a>
+					</li>
+				</ul>
+			</div><!--/.nav-collapse -->
+		</div>
+	</div>
+	<div class="container">
+		<%= yield %>
+	</div>
 </body>
 </html>
